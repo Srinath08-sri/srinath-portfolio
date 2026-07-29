@@ -107,7 +107,17 @@ nav ul li a:hover{
     max-width: 650px;
     margin-bottom: 35px;
 }
-
+.developer-credit {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
 /* Buttons */
 
 .home-buttons{
