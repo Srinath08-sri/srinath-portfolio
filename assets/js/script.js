@@ -1,45 +1,97 @@
-const words = [
-    "Java Full Stack Developer",
-    "MERN Stack Developer",
-    "Web Developer",
-    "Problem Solver"
-];
+/* =====================================================
+   HOME - TYPING ANIMATION
+===================================================== */
 
-let i = 0;
-let j = 0;
-let currentWord = "";
-let isDeleting = false;
+const typingElement = document.getElementById("typing");
 
-function type(){
+if (typingElement) {
 
-    currentWord = words[i];
+    const roles = [
+        "Full Stack Developer",
+        "Web Developer",
+        "Frontend Developer",
+        "Backend Developer"
+    ];
 
-    if(!isDeleting){
-        document.getElementById("typing").textContent =
-        currentWord.substring(0,j++);
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
 
-        if(j > currentWord.length){
-            isDeleting = true;
-            setTimeout(type,1200);
-            return;
-        }
+    function typeEffect() {
 
-    }else{
+        const currentRole = roles[roleIndex];
 
-        document.getElementById("typing").textContent =
-        currentWord.substring(0,j--);
+        if (!deleting) {
 
-        if(j==0){
-            isDeleting=false;
-            i++;
+            typingElement.textContent =
+                currentRole.substring(0, charIndex + 1);
 
-            if(i==words.length){
-                i=0;
+            charIndex++;
+
+            if (charIndex === currentRole.length) {
+
+                deleting = true;
+
+                setTimeout(typeEffect, 1800);
+
+                return;
+            }
+
+        } else {
+
+            typingElement.textContent =
+                currentRole.substring(0, charIndex - 1);
+
+            charIndex--;
+
+            if (charIndex === 0) {
+
+                deleting = false;
+
+                roleIndex++;
+
+                if (roleIndex >= roles.length) {
+                    roleIndex = 0;
+                }
+
+                setTimeout(typeEffect, 500);
+
+                return;
             }
         }
+
+        setTimeout(
+            typeEffect,
+            deleting ? 60 : 100
+        );
     }
 
-    setTimeout(type,isDeleting?60:100);
+    typeEffect();
 }
 
-type();
+
+/* =====================================================
+   SMOOTH SCROLL
+===================================================== */
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", function (event) {
+
+        const target = document.querySelector(
+            this.getAttribute("href")
+        );
+
+        if (target) {
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    });
+
+});
